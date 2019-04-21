@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Spare Parts Recognition</title>
+    <link rel="shortcut icon" href="/favicon" />
+    <!-- twitter-bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- font-awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- admin-lte -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/css/skins/_all-skins.min.css">
+</head>
+
+<body class="skin-blue hold-transition sidebar-mini sidebar-collapse">
+    <div class="wrapper">
+        <header id="header" class="main-header"></header>
+        <aside id="sidebar" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>
+                    Console
+                    <small>Console of Spare Parts Recognition</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Console</li>
+                </ol>
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Upload a sample image to recognize</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="tb-image" class="col-sm-3 control-label">image</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" id="tb-image" placeholder="file uploader">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tb-filename" class="col-sm-3 control-label">file name</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="tb-filename" placeholder="file name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3 control-label">
+                                    <img id="img-preview" for="tb-image" />
+                                    <canvas id="cvs-image" class="hide"></canvas>
+                                </div>
+                                <div class="col-sm-9">
+                                    <textarea id="ta-image-base64" class="form-control" rows="8"
+                                        placeholder="data:image/jpeg;base64" disabled="disabled"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="button" id="btn-sync" class="btn btn-primary pull-left"
+                                style="margin-right: 5px">Sync</button>
+                            <button type="button" id="btn-train" class="btn btn-primary pull-left">Train</button>
+                            <button type="reset" id="btn-reset" class="btn btn-default pull-right">Cancel</button>
+                            <button type="button" id="btn-recognize" class="btn btn-info pull-right"
+                                style="margin-right: 5px; display: none">Recognize</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+                <div id="pnl-result" class="box box-primary" style="display: none">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Response</h3>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="ta-raw-response" class="col-sm-3 control-label">response</label>
+                                    <div class="col-sm-9">
+                                        <textarea id="ta-raw-response" class="form-control" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <div id="pnl-preview" class="form-group">
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Main Footer -->
+        <footer id="footer" class="main-footer"></footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Adminlte -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.10/js/adminlte.min.js"></script>
+
+    <!-- <script src="./resource/js/main.js"></script> -->
+
+    <script type="text/javascript">
+        $(function () {
+            // load shared web parts
+            $("#header").load("./shared/header.html");
+            $("#footer").load("./shared/footer.html");
+
+            $("#sidebar").load("./shared/sidebar.html", function () {
+                $(".sidebar li.index-page").addClass("active");
+                $(".sidebar li.labels-page").removeClass("active");
+            });
+
+            var $tbImage = $("input#tb-image");
+            var $taImageBase64 = $("textarea#ta-image-base64");
+            var $btnRecognize = $("button#btn-recognize");
+            var $imgPreview = $("img#img-preview");
+            var $tbFilename = $("input#tb-filename");
+            var $btnSync = $("button#btn-sync");
+            var $btnTrain = $("button#btn-train");
+            var $btnReset = $("button#btn-reset");
+            var $pnlResult = $("div#pnl-result");
+            var $taRawResponse = $("textarea#ta-raw-response");
+            var $pnlPreview = $("div#pnl-preview");
+
+            $tbImage.on('change', (e) => {
+                if (typeof window.FileReader !== 'function') {
+                    alert("The file API isn't supported on this browser yet.");
+                    return;
+                }
+
+                let file = e.target.files[0];
+                console.log(file);
+                $taImageBase64.val('loading ...');
+                $btnRecognize.hide();
+
+                let fr = new FileReader();
+                fr.onload = () => {
+                    let img = new Image();
+                    img.onload = () => {
+                        let canvas = document.getElementById("cvs-image");
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        let ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0);
+
+                        $taImageBase64.val(canvas.toDataURL(file.type));
+                        $btnRecognize.show();
+                    };
+
+                    img.src = fr.result;
+                    $imgPreview.prop('src', img.src).css('max-width', '200px').css('max-height',
+                        '168px');
+
+                    $tbFilename.val(file.name);
+                };
+                fr.readAsDataURL(file);
+            });
+
+            $btnSync.click(() => {
+                $btnSync.text('Syncing').prop('disable', false);
+                $.post("/api/sync", function (d, status) {
+                    if (status === 'success' && d) {
+                        console.log(d);
+                        $btnSync.text(`Synced (${d.length})`).prop('disable', true);
+                    } else {
+                        alert(status);
+                    }
+                });
+            });
+
+            $btnTrain.click(() => {
+                $btnTrain.text('Training').prop('disable', false);
+                $.post("/api/train", function (d, status) {
+                    if (status === 'success' && d) {
+                        console.log(d);
+                        $btnTrain.text(`Trained (${Object.keys(d).length})`).prop('disable', true);
+                    } else {
+                        alert(status);
+                    }
+                });
+            });
+
+            $btnReset.click(() => {
+                $imgPreview.prop('src', '');
+                $pnlResult.hide();
+                $taRawResponse.val('');
+                $btnRecognize.hide().prop('disabled', false);
+            });
+
+            $btnRecognize.click(() => {
+                var filename = $tbFilename.val();
+                var imageBase64 = $taImageBase64.val();
+
+                if (filename != '' && imageBase64 != '') {
+                    $btnRecognize.text('Recognizing').prop('disabled', true);
+                    const settings = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "/api/recognize",
+                        "method": "POST",
+                        "headers": {
+                            "Content-Type": "application/json",
+                            "cache-control": "no-cache",
+                        },
+                        "processData": false,
+                        "data": JSON.stringify({
+                            "filename": filename,
+                            "image": imageBase64
+                        })
+                    };
+
+                    $.ajax(settings).done((res) => {
+                        console.log(res);
+                        $taRawResponse.val(JSON.stringify(res));
+                        $pnlPreview.empty().hide();
+
+                        if (res && res.state === 'success' && res.data.length > 0) {
+                            $pnlPreview.append(
+                                    `<label class="col-sm-3 control-label">preview</label>`)
+                                .show();
+                            $.each(res.data, function (i, obj) {
+                                let item = $("<div />", {
+                                        class: "col-sm-3"
+                                    })
+                                    .append($(
+                                        `<h4>${obj.name} (${obj.score.toFixed(2)})</h4>`
+                                    ))
+                                    .append($(
+                                        `<p>code: ${obj.code} | quantity: ${obj.quantity} | price: ${obj.price}</p>`
+                                    ))
+                                    .append($("<img />", {
+                                        src: obj.image,
+                                        style: 'width:100%;max-width:200px'
+                                    }));
+                                $pnlPreview.append(item);
+                            });
+                        }
+
+                        $pnlResult.fadeIn(1000);
+                        $btnRecognize.text('Recognize').prop('disabled', false);
+                    }).fail((res) => {
+                        alert(`${res.status} (${res.statusText})`);
+                    });
+                } else {
+                    alert('please upload the input image');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "spare-part-recognition",
+  "version": "2.1.0",
+  "main": "index.js",
+  "description": "the image handler of spare part recognition",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CyranoChen/spare-parts-recognition-scp"
+  },
+  "scripts": {
+    "start": "node index.js spare-part-recognition",
+    "stop": "pkill node index.js spare-part-recognition",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "restart": "pkill node && npm run start"
+  },
+  "author": "Cyrano Chen",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "request": "^2.88.0"
+  },
+  "engines": {
+    "node": "8.x"
+  }
+}
