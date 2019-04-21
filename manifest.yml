@@ -6,12 +6,12 @@ applications:
     buildpacks: 
         - https://github.com/cloudfoundry/nodejs-buildpack.git
     env:
-        B1_SERVICELAYER_APIURL: https://52.59.87.94:50000/b1s/v1
-        B1_USERNAME: manager
-        B1_PASSWORD: manager
-        B1_COMPANYDB: SBODEMOGB
-        LEON_APIKEY: jGMB8R9KPK2MhNv7Tc9vTVGQ1mu7KLB0
+        B1_SERVICELAYER_APIURL: # b1 server layer url + port + path
+        B1_USERNAME: # b1 username
+        B1_PASSWORD: # b1 password
+        B1_COMPANYDB: # b1 companydb
+        LEON_APIKEY: # leonardo api key
         LEON_IMAGEFEATUREEXTRACTION_APIURL: https://sandbox.api.sap.com/ml/imagefeatureextraction/feature-extraction
         LEON_SIMILARITYSCORING_APIURL: https://sandbox.api.sap.com/ml/similarityscoring/similarity-scoring
-        GENERAL_THRESHOLD_SIMILAR: 0.65
-        GENERAL_THRESHOLD_NUM_SIMILAR: 3
+        GENERAL_THRESHOLD_SIMILAR: 0.65 # similarity threshold 0~1
+        GENERAL_THRESHOLD_NUM_SIMILAR: 3 # default return 3 condinates 
