@@ -15,7 +15,7 @@ async function searchImage(filename, numSimilarVectors = 3) {
 
     if (result && result.hasOwnProperty('predictions') && result.predictions[0].hasOwnProperty('featureVectors')) {
         var condinates = [];
-        labels = label.getLabels();
+        const labels = label.getLabels();
         for (let k in labels) {
             condinates.push({ "id": k, "vector": labels[k].featureVectors });
         }
