@@ -9,7 +9,7 @@ module.exports = {
     export: exportResult
 };
 
-async function searchImage(filename, numSimilarVectors = 3) {
+async function searchImage(filename) {
     var result = await leon.featureExtraction(filename);
     console.log('feature extraction:', result);
 
@@ -26,7 +26,7 @@ async function searchImage(filename, numSimilarVectors = 3) {
         };
         // console.log(vectors);
 
-        return await leon.similarityScoring(vectors, numSimilarVectors);
+        return await leon.similarityScoring(vectors);
     } else {
         return [];
     }

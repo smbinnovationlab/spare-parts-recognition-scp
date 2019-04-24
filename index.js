@@ -57,7 +57,7 @@ app.post('/api/recognize', async function (req, res, next) {
         }
     });
 
-    var result = await recognize.search(filename, _configs.GENERAL.THRESHOLD_NUM_SIMILAR);
+    var result = await recognize.search(filename);
     console.log('similarity scoring:', result);
 
     if (result && result.hasOwnProperty('predictions') && result.predictions.length > 0 &&
@@ -72,15 +72,20 @@ app.post('/api/recognize', async function (req, res, next) {
         }
 
         if (condinates.length > 0) {
-            res.send({ "state": "success", "filename": filename, "data": recognize.export(condinates) });
+            res.send({ "state": "success", "filename": filename, "data": recognize.export(condinates), "raw": result.predictions[0].similarVectors });
             console.log(condinates);
+            console.log('-'.repeat(100));
+            return;
+        } else {
+            res.send({ "state": "success", "filename": filename, "data": [], "raw": result.predictions[0].similarVectors });
+            console.log('no condinates');
             console.log('-'.repeat(100));
             return;
         }
     }
 
     res.send({ "state": "success", "filename": filename, "data": [] });
-    console.log('no condinates');
+    console.log('exception on smilarity scoring');
     console.log('-'.repeat(100));
 });
 
