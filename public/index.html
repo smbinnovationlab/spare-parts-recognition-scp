@@ -182,7 +182,7 @@
                 $.post("/api/sync/b1", function (d, status) {
                     if (status === 'success' && d) {
                         console.log(d);
-                        $btnSyncB1.text(`Synced (${d.length})`).prop('disable', true);
+                        $btnSyncB1.text(`Synced B1 (${d.length})`).prop('disable', true);
                     } else {
                         alert(status);
                     }
@@ -194,7 +194,7 @@
                 $.post("/api/sync/byd", function (d, status) {
                     if (status === 'success' && d) {
                         console.log(d);
-                        $btnSyncByd.text(`Synced (${d.length})`).prop('disable', true);
+                        $btnSyncByd.text(`Synced ByDesign (${d.length})`).prop('disable', true);
                     } else {
                         alert(status);
                     }

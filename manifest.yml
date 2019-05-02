@@ -10,6 +10,9 @@ applications:
         B1_USERNAME: # b1 username
         B1_PASSWORD: # b1 password
         B1_COMPANYDB: # b1 companydb
+        BYD_TENANT_HOSTNAME: # bydesign odata api path
+        BYD_USERNAME: # byd username 
+        BYD_PASSWORD: # byd password
         LEON_APIKEY: # leonardo api key
         LEON_IMAGEFEATUREEXTRACTION_APIURL: https://sandbox.api.sap.com/ml/imagefeatureextraction/feature-extraction
         LEON_SIMILARITYSCORING_APIURL: https://sandbox.api.sap.com/ml/similarityscoring/similarity-scoring

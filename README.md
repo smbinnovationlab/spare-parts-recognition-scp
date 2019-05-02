@@ -39,6 +39,16 @@ B1_PASSWORD: <password>
 B1_COMPANYDB: <companydb>
 ```
 
+This project also integrate with an instance of ByDesign and set the adminstrator account for accessing the odata api of product data.
+
+The odata api [configuration profile](vmumaterial.xml) should be imported by custom odata services.
+
+```sh
+BYD_TENANT_HOSTNAME: https://<ByDesign Tenant>/sap/byd/odata/cust/v1 
+BYD_USERNAME: <username> 
+BYD_PASSWORD: <password>
+```
+
 From the root directory, using the [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) push your app to the SAP CP Cloud Foundry
 
 ```sh
