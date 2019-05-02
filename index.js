@@ -8,7 +8,6 @@ const https = require('https');
 const config = require('./app/config');
 const label = require('./app/label');
 const recognize = require('./app/recognize');
-const b1service = require('./app/b1-sl');
 
 // ssl cert
 // const credentials = {
@@ -89,9 +88,16 @@ app.post('/api/recognize', async function (req, res, next) {
     console.log('-'.repeat(100));
 });
 
-app.post('/api/sync', async function (req, res, next) {
-    console.log('[syncDatasets]', new Date().toISOString());
-    var result = await label.syncDatasets();
+app.post('/api/sync/b1', async function (req, res, next) {
+    console.log('[syncDatasets b1]', new Date().toISOString());
+    var result = await label.syncDatasetsB1();
+    res.send(result);
+    console.log('-'.repeat(100));
+});
+
+app.post('/api/sync/byd', async function (req, res, next) {
+    console.log('[syncDatasets byd]', new Date().toISOString());
+    var result = await label.syncDatasetsByd();
     res.send(result);
     console.log('-'.repeat(100));
 });

@@ -17,6 +17,11 @@ module.exports = {
                 "USERNAME": process.env.B1_USERNAME,
                 "PASSWORD": process.env.B1_PASSWORD,
                 "COMPANYDB": process.env.B1_COMPANYDB
+            },
+            "BYDESIGN":{
+                "TENANT_HOSTNAME": process.env.BYD_TENANT_HOSTNAME,
+                "USERNAME": process.env.BYD_USERNAME,
+                "PASSWORD": process.env.BYD_PASSWORD,
             }
         };
     }

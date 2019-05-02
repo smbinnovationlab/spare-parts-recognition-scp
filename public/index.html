@@ -69,8 +69,10 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="button" id="btn-sync" class="btn btn-primary pull-left"
-                                style="margin-right: 5px">Sync</button>
+                            <button type="button" id="btn-sync-b1" class="btn btn-primary pull-left"
+                                style="margin-right: 5px">Sync B1</button>
+                            <button type="button" id="btn-sync-byd" class="btn btn-primary pull-left"
+                                style="margin-right: 5px">Sync ByDesign</button>
                             <button type="button" id="btn-train" class="btn btn-primary pull-left">Train</button>
                             <button type="reset" id="btn-reset" class="btn btn-default pull-right">Cancel</button>
                             <button type="button" id="btn-recognize" class="btn btn-info pull-right"
@@ -133,7 +135,8 @@
             var $btnRecognize = $("button#btn-recognize");
             var $imgPreview = $("img#img-preview");
             var $tbFilename = $("input#tb-filename");
-            var $btnSync = $("button#btn-sync");
+            var $btnSyncB1 = $("button#btn-sync-b1");
+            var $btnSyncByd = $("button#btn-sync-byd");
             var $btnTrain = $("button#btn-train");
             var $btnReset = $("button#btn-reset");
             var $pnlResult = $("div#pnl-result");
@@ -174,12 +177,24 @@
                 fr.readAsDataURL(file);
             });
 
-            $btnSync.click(() => {
-                $btnSync.text('Syncing').prop('disable', false);
-                $.post("/api/sync", function (d, status) {
+            $btnSyncB1.click(() => {
+                $btnSyncB1.text('Syncing').prop('disable', false);
+                $.post("/api/sync/b1", function (d, status) {
                     if (status === 'success' && d) {
                         console.log(d);
-                        $btnSync.text(`Synced (${d.length})`).prop('disable', true);
+                        $btnSyncB1.text(`Synced (${d.length})`).prop('disable', true);
+                    } else {
+                        alert(status);
+                    }
+                });
+            });
+
+            $btnSyncByd.click(() => {
+                $btnSyncByd.text('Syncing').prop('disable', false);
+                $.post("/api/sync/byd", function (d, status) {
+                    if (status === 'success' && d) {
+                        console.log(d);
+                        $btnSyncByd.text(`Synced (${d.length})`).prop('disable', true);
                     } else {
                         alert(status);
                     }
@@ -191,7 +206,8 @@
                 $.post("/api/train", function (d, status) {
                     if (status === 'success' && d) {
                         console.log(d);
-                        $btnTrain.text(`Trained (${Object.keys(d).length})`).prop('disable', true);
+                        $btnTrain.text(`Trained (${Object.keys(d).length})`).prop('disable',
+                            true);
                     } else {
                         alert(status);
                     }
