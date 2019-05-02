@@ -1,15 +1,15 @@
-# Spare Part Recognition - A Simple Integration between SAP Business One and SAP Leonardo
+# Spare Part Recognition - A Simple Integration between SAP Business One / ByDesign and SAP Leonardo
 
 ![avatar](https://jam4.sapjam.com/profile/vQ2WGFrz1l1cmyPIZX6G8c/documents/exUx6J98mB0A3RqbVkE0W1/thumbnail?max_x=1200&max_y=1200)
 
-This is a sample integration of SAP Business One with SAP Leonardo. It uses SAP Leonardo APIs to extract the features vectors of a given input product image and then find out the smiliar items.
+This is a sample integration of SAP Business One or SAP Business ByDesign with SAP Leonardo. It uses SAP Leonardo APIs to extract the features vectors of a given input product image and then find out the smiliar items.
 
 ## Overview
 
-- It is coded in [NodeJ](https://nodejs.org/en/)
+- It is coded in [NodeJS](https://nodejs.org/en/)
 - Can be deployed anywhere and I suggest to do it in the  [SAP Cloud Platform](https://cloudplatform.sap.com).  
-- It is integrated with [SAP Business One](https://www.sap.com/uk/products/business-one.html) using the [Service Layer](https://www.youtube.com/watch?v=zaF_i7x9-s0&list=PLMdHXbewhZ2QsgYSICRQuoL8lkoEHjNzS&index=22).
-- It consumes the [SAP Leonardo APIs](https://api.sap.com/package/SAPLeonardoMLFunctionalServices?section=Artifacts) available in the SAP API Business Hub
+- It is integrated with [SAP Business One](https://www.sap.com/uk/products/business-one.html) using the [Service Layer](https://www.youtube.com/watch?v=zaF_i7x9-s0&list=PLMdHXbewhZ2QsgYSICRQuoL8lkoEHjNzS&index=22) or [SAP Business ByDesign](https://www.sap.com/products/business-bydesign.html) using the [OData API](https://blogs.sap.com/2015/03/10/odata-for-sap-business-bydesign-analytics/).
+- It consumes the [SAP Leonardo APIs](https://api.sap.com/package/SAPLeonardoMLFunctionalServices?section=Artifacts) available in the SAP API Business Hub.
 
 ## Installation in the Cloud
 
