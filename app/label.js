@@ -66,7 +66,7 @@ function getLabels(key) {
 // initial the labels.json by b1 product items dataset
 async function initialLabels(dataset = 'all') {
     _itemLabels = {};
-    if (dataset == 'all' || dataset == 'b1') {
+    if ((dataset == 'all' || dataset == 'b1') && fs.existsSync('./app/label/datasets-b1.json')) {
         const ds = JSON.parse(fs.readFileSync('./app/label/datasets-b1.json'));
 
         if (ds && ds.length > 0) {
@@ -92,7 +92,7 @@ async function initialLabels(dataset = 'all') {
         }
     }
 
-    if (dataset == 'all' || dataset == 'byd') {
+    if ((dataset == 'all' || dataset == 'byd') && fs.existsSync('./app/label/datasets-byd.json')) {
         const ds = JSON.parse(fs.readFileSync('./app/label/datasets-byd.json'));
 
         if (ds && ds.length > 0) {

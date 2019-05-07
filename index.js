@@ -104,7 +104,7 @@ app.post('/api/sync/byd', async function (req, res, next) {
 
 app.post('/api/train', async function (req, res, next) {
     console.log('[initialLabels]', new Date().toISOString());
-    var result = await label.initialLabels();
+    var result = await label.initialLabels(dataset = _configs.GENERAL.DATASET);
     res.send(result);
     console.log('-'.repeat(100));
 });
