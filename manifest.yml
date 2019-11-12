@@ -1,20 +1,20 @@
 applications:
-  - name: spare-parts-recognition
+  - name: spare-parts-recognition-poc
     memory: 128M
     disk_quota: 512M
     instances: 1
     buildpacks: 
         - https://github.com/cloudfoundry/nodejs-buildpack.git
     env:
-        B1_SERVICELAYER_APIURL: # b1 server layer url + port + path
-        B1_USERNAME: # b1 username
-        B1_PASSWORD: # b1 password
-        B1_COMPANYDB: # b1 companydb
-        BYD_TENANT_HOSTNAME: # bydesign odata api path
-        BYD_USERNAME: # byd username 
-        BYD_PASSWORD: # byd password
-        LEON_APIKEY: # leonardo api key
-        LEON_IMAGEFEATUREEXTRACTION_APIURL: https://sandbox.api.sap.com/ml/imagefeatureextraction/feature-extraction
-        LEON_SIMILARITYSCORING_APIURL: https://sandbox.api.sap.com/ml/similarityscoring/similarity-scoring
+        B1_SERVICELAYER_APIURL: https://18.195.210.79:50000/b1s/v1
+        B1_USERNAME: manager
+        B1_PASSWORD: manager
+        B1_COMPANYDB: SBODEMOGB
+        BYD_TENANT_HOSTNAME: https://my600611.sapbyd.cn/sap/byd/odata/cust/v1
+        BYD_USERNAME: administration01 
+        BYD_PASSWORD: Welcome1
+        LEON_APIKEY: ufnjmXlzANMGQsUzRGMwLLIrpn2tCpw3
+        LEON_IMAGEFEATUREEXTRACTION_APIURL: https://sandbox.api.sap.com/mlfs/api/v2/image/feature-extraction
+        LEON_SIMILARITYSCORING_APIURL: https://sandbox.api.sap.com/mlfs/api/v2/similarity-scoring
         GENERAL_THRESHOLD_SIMILAR: 0.65 # similarity threshold 0~1
         GENERAL_THRESHOLD_NUM_SIMILAR: 3 # default return 3 condinates 

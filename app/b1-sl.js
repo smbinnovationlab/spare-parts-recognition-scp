@@ -49,7 +49,17 @@ async function itemList() {
         const cookie = req.cookie(_cookieString);
         const url = _configs.BUSINESSONE.SERVICELAYER_APIURL + '/Items';
         j.setCookie(cookie, url);
-        req.get(url, { json: true, jar: j, rejectUnauthorized: false }, (err, res, body) => {
+        req.get(url, {
+            qs: {
+                '$select': 'ItemCode,ItemName,QuantityOnStock,Picture,ItemPrices'
+            },
+            headers: {
+                'Prefer': 'odata.maxpagesize=0'
+            },
+            json: true,
+            jar: j,
+            rejectUnauthorized: false
+        }, (err, res, body) => {
             if (err) { reject(err); }
             resolve(body);
         });
