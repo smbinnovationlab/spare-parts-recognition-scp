@@ -6,14 +6,14 @@ applications:
     buildpacks: 
         - https://github.com/cloudfoundry/nodejs-buildpack.git
     env:
-        B1_SERVICELAYER_APIURL: https://18.195.210.79:50000/b1s/v1
-        B1_USERNAME: manager
-        B1_PASSWORD: manager
-        B1_COMPANYDB: SBODEMOGB
-        BYD_TENANT_HOSTNAME: https://my600611.sapbyd.cn/sap/byd/odata/cust/v1
-        BYD_USERNAME: administration01 
-        BYD_PASSWORD: Welcome1
-        LEON_APIKEY: ufnjmXlzANMGQsUzRGMwLLIrpn2tCpw3
+        B1_SERVICELAYER_APIURL: 
+        B1_USERNAME: 
+        B1_PASSWORD: 
+        B1_COMPANYDB: 
+        BYD_TENANT_HOSTNAME: 
+        BYD_USERNAME: 
+        BYD_PASSWORD: 
+        LEON_APIKEY: 
         LEON_IMAGEFEATUREEXTRACTION_APIURL: https://sandbox.api.sap.com/mlfs/api/v2/image/feature-extraction
         LEON_SIMILARITYSCORING_APIURL: https://sandbox.api.sap.com/mlfs/api/v2/similarity-scoring
         GENERAL_THRESHOLD_SIMILAR: 0.65 # similarity threshold 0~1
