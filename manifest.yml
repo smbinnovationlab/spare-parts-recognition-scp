@@ -14,7 +14,7 @@ applications:
         BYD_USERNAME: 
         BYD_PASSWORD: 
         LEON_APIKEY: 
-        LEON_IMAGEFEATUREEXTRACTION_APIURL: https://sandbox.api.sap.com/mlfs/api/v2/image/feature-extraction
-        LEON_SIMILARITYSCORING_APIURL: https://sandbox.api.sap.com/mlfs/api/v2/similarity-scoring
+        LEON_IMAGEFEATUREEXTRACTION_APIURL: https://sandbox.api.sap.com/ml/imagefeatureextraction/feature-extraction
+        LEON_SIMILARITYSCORING_APIURL: https://sandbox.api.sap.com/ml/similarityscoring/similarity-scoring
         GENERAL_THRESHOLD_SIMILAR: 0.65 # similarity threshold 0~1
         GENERAL_THRESHOLD_NUM_SIMILAR: 3 # default return 3 condinates 
